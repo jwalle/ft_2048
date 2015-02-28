@@ -21,8 +21,13 @@ enum	e_const
 	WIN_VALUE = 2048
 };
 
+typedef struct 	e_tab
+{
+	int 		tab[4][4];
+}				t_tab;
+
 void	print_cell(int nb);
-void	colle00(int x, int row, int col, int **tab);
+void	colle00(int x, int row, int col, t_tab *toto);
 int		ft_cell_size(int max);
 
 

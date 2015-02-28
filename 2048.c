@@ -32,18 +32,18 @@ void	print_cell(int nb)
 }
 
 
-void	init_tab(int **tab)
+void	init_tab(t_tab *toto)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		j = 0;
-		while(j < 3)
+		while(j < 4)
 		{
-			tab[i][j] = 0;
+			toto->tab[i][j] = 2;
 			j++;
 		}
 		i++;
@@ -53,24 +53,19 @@ void	init_tab(int **tab)
 
 int		main()
 {
-	int SIZE_BOARD;
-	int SIZE_CELL;
-	int row;
-	int col;
-	int **tab;
+	int 	SIZE_BOARD;
+	int 	SIZE_CELL;
+	int 	row;
+	int 	col;
+	t_tab	toto;
 
-	tab = malloc(sizeof(int)* 16);
-	init_tab(tab);
+	init_tab(&toto);
 	initscr();
 	getmaxyx(stdscr, row, col);
-	printf("line %d\n", row);
-	printf("columns %d\n", col);
 	col < row ? (SIZE_BOARD = col) : (SIZE_BOARD = row);
 	SIZE_CELL = ft_cell_size(SIZE_BOARD);
-	printf("SIZE_BOARD = %d\n", SIZE_BOARD);
-	printf("SIZE_CELL = %d\n", SIZE_CELL);
 	//print_grid();
-	colle00(SIZE_CELL, row, col, tab);
+	colle00(SIZE_CELL, row, col, &toto);
 	refresh();
 	getch();
 	endwin();

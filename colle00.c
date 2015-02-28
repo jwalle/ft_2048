@@ -16,9 +16,9 @@ int		ft_cell_size(int max)
 {
 	int min_cell;
 	min_cell = 5;
-	while ((min_cell * 4 + 5) < max - 10)
+	while ((min_cell * 4 + 5) < max)
 		min_cell = min_cell + 2;
-	return(min_cell);
+	return(min_cell); 
 }
 
 void	draw_line(int x, int xa, int line)
@@ -51,25 +51,25 @@ void	draw_cell(int x, int rang)
 	}
 }
 
-void	draw_cell_number(int x, int xa, int **tab)
+void	draw_cell_number(int x, int xa, t_tab *toto)
 {
 	int i;
 	int j;
 
-	i = 0;
-	while (i < 3)
+	i = 1;
+	while (i < 5)
 	{
-		j = 0;
-		while(j < 3)
+		j = 1;
+		while(j < 5)
 		{
-			mvprintw((xa / 2) * i,(x / 2) * j, "%d", tab[i][j]);
+			mvprintw(x * i - (x/2), xa * j - (xa/2), "%d", toto->tab[i - 1][j - 1]);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	colle00(int x, int row, int col, int **tab)
+void	colle00(int x, int row, int col, t_tab *toto)
 {
 	int line;
 	int rang;
@@ -88,8 +88,7 @@ void	colle00(int x, int row, int col, int **tab)
 		draw_cell(x, rang);
 		rang++;
 	}
-	draw_line(x, xa, line);
-	draw_cell_number(x, xa, tab);		
+	draw_cell_number(x, xa, toto);		
 	printf("%d, %d", row, col);
 
 }
