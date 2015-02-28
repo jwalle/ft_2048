@@ -77,6 +77,7 @@ void	colle00(int x, int row, int col, t_tab *toto)
 	int rang;
 	int xa;
 
+	clear();
 	xa = x * 2;
 	line = 0;
 	while (line < 5)

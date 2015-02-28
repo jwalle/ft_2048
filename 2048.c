@@ -80,6 +80,7 @@ int		main()
 	int 	SIZE_CELL;
 	int 	row;
 	int 	col;
+	int		c;
 	t_tab	toto;
 
 	srand(time(0));
@@ -87,14 +88,21 @@ int		main()
 	init_tab(&toto);
 	initscr();
 	getmaxyx(stdscr, row, col);
+	keypad(stdscr, true);
 	col < row ? (SIZE_BOARD = col) : (SIZE_BOARD = row);
 	SIZE_CELL = ft_cell_size(SIZE_BOARD);
 	//print_grid();
 	colle00(SIZE_CELL, row, col, &toto);
+	move(0, 0);
 	refresh();
-	getch();
+	while ((c = getch()))
+	{
+		if (c == 27)
+			break;
+	}
+	sleep(1);
 	endwin();
-	clear_tab(&toto);
+	//clear_tab(&toto);
 	return (0);
 }
 
