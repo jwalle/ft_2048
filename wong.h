@@ -9,6 +9,8 @@
 # include <unistd.h>
 # include <termios.h>
 # include <curses.h>
+# include <stdlib.h>
+# include <time.h>
 
 # define SIZE 4
 # define BOARD_SIZE 0
@@ -24,6 +26,7 @@ enum	e_const
 typedef struct 	e_tab
 {
 	int 		tab[4][4];
+	int			empty;
 }				t_tab;
 
 void	print_cell(int nb);

@@ -16,7 +16,7 @@ int		ft_cell_size(int max)
 {
 	int min_cell;
 	min_cell = 5;
-	while ((min_cell * 4 + 5) < max)
+	while ((min_cell * 4 + 5) < max - 3)
 		min_cell = min_cell + 2;
 	return(min_cell); 
 }
@@ -62,7 +62,9 @@ void	draw_cell_number(int x, int xa, t_tab *toto)
 		j = 1;
 		while(j < 5)
 		{
-			mvprintw(x * i - (x/2), xa * j - (xa/2), "%d", toto->tab[i - 1][j - 1]);
+			(toto->tab[i - 1][j - 1] != 0) ? mvprintw(x * i - (x/2), xa * j - (xa/2),
+			 "%d", toto->tab[i - 1][j - 1]) : mvprintw(x * i - (x/2), xa * j - (xa/2),
+			  " ");
 			j++;
 		}
 		i++;

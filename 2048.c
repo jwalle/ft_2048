@@ -2,26 +2,30 @@
 
 #include "wong.h"
 
-/*void	print_grid()
+
+int ram()
 {
-	 int i;
-	 int j;
+	return (rand() % 4 + 1);
+}
 
-	 i = 0;
-	 while (i < SIZE)
-	 {
-	 	j = 0;
-	 	while (j < SIZE)
-	 	{
-	 		//print_cell(i);
-	 		colle00(5, );
-	 		j++;
-	 	}
-	 	printf("\n");
-	 	i++;
-	 }
-}*/
 
+void	clear_tab(t_tab *toto)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while(j < 4)
+		{
+			toto->tab[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
 
 
 void	print_cell(int nb)
@@ -29,6 +33,23 @@ void	print_cell(int nb)
 	printf("[");
 	printf("%d", nb);
 	printf("]");
+}
+
+void	add_random(t_tab *toto)
+{
+	int i;
+	int j;
+
+	i = ram() - 1;
+	j = ram() - 1;
+
+	if (toto->tab[i][j] == 0)
+	{
+		(((rand()) % 100) < 50) ? (toto->tab[i][j] = 2) : (toto->tab[i][j] = 4);
+		toto->empty--;
+	}
+	else
+		add_random(toto);
 }
 
 
@@ -43,11 +64,13 @@ void	init_tab(t_tab *toto)
 		j = 0;
 		while(j < 4)
 		{
-			toto->tab[i][j] = 2;
+			toto->tab[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
+	add_random(toto);
+	add_random(toto);
 }
 
 
@@ -59,6 +82,8 @@ int		main()
 	int 	col;
 	t_tab	toto;
 
+	srand(time(0));
+	toto.empty = 16;
 	init_tab(&toto);
 	initscr();
 	getmaxyx(stdscr, row, col);
@@ -69,7 +94,7 @@ int		main()
 	refresh();
 	getch();
 	endwin();
-
+	clear_tab(&toto);
 	return (0);
 }
 
