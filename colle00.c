@@ -9,95 +9,89 @@
 /*   Updated: 2014/08/17 20:23:25 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "wong.h"
 
 int		ft_cell_size(int max)
 {
 	int min_cell;
-
 	min_cell = 5;
 	while ((min_cell * 4 + 5) < max - 10)
 		min_cell = min_cell + 2;
 	return(min_cell);
 }
 
-void	draw_line(int x)
+void	draw_line(int x, int xa, int line)
 {
-	int	y;
 	int i;
 
 	i = 0;
-	while (i < 4)
+	mvprintw(line * x,0, "+");
+	while (i < (xa * 4))
 	{
-		printf("+");
-		y = x;
-		while (y--)
-			printf("-");
+		if (i % x == 0 && i % xa == 0)
+			mvprintw(line * x, i,"+");
+		else
+			mvprintw(line * x, i, "-");
 		i++;
 	}
-	printf("+\n");
+	mvprintw(line * x, i,"+");
 }
 
-
-void	draw_cell(int x)
+void	draw_cell(int x, int rang)
 {
-	int	y;
 	int i;
 
 	i = 0;
-	while (i < 4)
+	while (i < (x * 4))
 	{
-		printf("|");
-		y = x;
-		while (y--)
-			printf(" ");
+		if (i % x != 0)
+			mvprintw(i,rang * (x * 2),"|");
 		i++;
 	}
-	printf("|\n");
 }
 
-void	draw_cell_number(int x)
-{
-	int i;
-	int j;
-	char *s;
-
-	s = "2048";
-
-	j = x / 2 + (int)ft_strlen(s) / 2;
-	i = 0;
-	while (i < 4)
-	{
-		printf("|");
-		printf("%*s", j, s);
-		printf("%*s",x - j , "");
-		i++;
-	}
-	printf("|\n");
-}
-
-void	colle00(int x)
+void	draw_cell_number(int x, int xa, int **tab)
 {
 	int i;
 	int j;
 
-	j = 0;
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
-		draw_line(x);
 		j = 0;
-		while(j != x)
+		while(j < 3)
 		{
-			if (j == x / 2)
-				draw_cell_number(x);
-			else
-				draw_cell(x);
+			mvprintw((xa / 2) * i,(x / 2) * j, "%d", tab[i][j]);
 			j++;
 		}
 		i++;
 	}
-	draw_line(x);
+}
+
+void	colle00(int x, int row, int col, int **tab)
+{
+	int line;
+	int rang;
+	int xa;
+
+	xa = x * 2;
+	line = 0;
+	while (line < 5)
+	{
+		draw_line(x, xa, line);
+		line++;
+	}
+	rang = 0;
+	while(rang < 5)
+	{
+		draw_cell(x, rang);
+		rang++;
+	}
+	draw_line(x, xa, line);
+	draw_cell_number(x, xa, tab);		
+	printf("%d, %d", row, col);
+
 }
 
 /*void	colle00(int x, int y)

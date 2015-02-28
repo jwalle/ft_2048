@@ -2,7 +2,7 @@
 
 #include "wong.h"
 
-void	print_grid()
+/*void	print_grid()
 {
 	 int i;
 	 int j;
@@ -14,13 +14,13 @@ void	print_grid()
 	 	while (j < SIZE)
 	 	{
 	 		//print_cell(i);
-	 		colle00(5);
+	 		colle00(5, );
 	 		j++;
 	 	}
 	 	printf("\n");
 	 	i++;
 	 }
-}
+}*/
 
 
 
@@ -32,28 +32,54 @@ void	print_cell(int nb)
 }
 
 
+void	init_tab(int **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while(j < 3)
+		{
+			tab[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
+
 int		main()
 {
-	struct winsize w;
-	//struct sigaction sa;
 	int SIZE_BOARD;
 	int SIZE_CELL;
+	int row;
+	int col;
+	int **tab;
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-	printf("line %d\n", w.ws_row);
-	printf("columns %d\n", w.ws_col);
-	w.ws_col < w.ws_row ? (SIZE_BOARD = w.ws_col) : (SIZE_BOARD = w.ws_row);
+	tab = malloc(sizeof(int)* 16);
+	init_tab(tab);
+	initscr();
+	getmaxyx(stdscr, row, col);
+	printf("line %d\n", row);
+	printf("columns %d\n", col);
+	col < row ? (SIZE_BOARD = col) : (SIZE_BOARD = row);
 	SIZE_CELL = ft_cell_size(SIZE_BOARD);
 	printf("SIZE_BOARD = %d\n", SIZE_BOARD);
 	printf("SIZE_CELL = %d\n", SIZE_CELL);
 	//print_grid();
-	colle00(SIZE_CELL);
+	colle00(SIZE_CELL, row, col, tab);
+	refresh();
+	getch();
+	endwin();
 
 	return (0);
 }
 
-/*static void
-sigwinchHandler(int sig)
+/*
+static void sigwinchHandler(int sig)
 {
     struct winsize ws;
     struct sigaction sa;
@@ -62,7 +88,8 @@ sigwinchHandler(int sig)
         printf("error\n");
 	printf("%*d\n", (ws.ws_row / 2), sig);
 }
-	printf("\e[H");
+
+
 
 int main()
 {
@@ -84,4 +111,5 @@ int main()
                 "%d rows * %d columns\n", ws.ws_row, ws.ws_col);
 		
     }
-}*/
+}
+*/

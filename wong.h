@@ -7,10 +7,8 @@
 # include <signal.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <sys/ioctl.h>
 # include <termios.h>
-#include <errno.h>
-
+# include <curses.h>
 
 # define SIZE 4
 # define BOARD_SIZE 0
@@ -24,7 +22,7 @@ enum	e_const
 };
 
 void	print_cell(int nb);
-void	colle00(int x);
+void	colle00(int x, int row, int col, int **tab);
 int		ft_cell_size(int max);
 
 

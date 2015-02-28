@@ -3,8 +3,8 @@ NAME = 2048
 all : $(NAME)
 
 $(NAME) :
-	gcc -c -g -Wall -Werror -Wextra -I libft/includes/ *.c
-	gcc -o $(NAME) -g *.o -L libft/ -lft
+	gcc -c -g -Wall -Werror -Wextra -I libft/includes/ *.c -lncurses
+	gcc -o $(NAME) -g *.o -L libft/ -lft -lncurses
 
 clean:
 	/bin/rm -f *.o
