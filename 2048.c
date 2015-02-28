@@ -39,8 +39,6 @@ int		main()
 	int SIZE_BOARD;
 	int SIZE_CELL;
 
-	printf("\e[H");
-	printf("\e[m");
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	printf("line %d\n", w.ws_row);
 	printf("columns %d\n", w.ws_col);
@@ -64,6 +62,7 @@ sigwinchHandler(int sig)
         printf("error\n");
 	printf("%*d\n", (ws.ws_row / 2), sig);
 }
+	printf("\e[H");
 
 int main()
 {

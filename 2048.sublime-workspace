@@ -4,12 +4,76 @@
 		"selected_items":
 		[
 			[
-				"mu",
-				"multi_fd"
+				"dr",
+				"draw_line"
 			],
 			[
 				"ft",
-				"ft_input"
+				"ft_strlen"
+			],
+			[
+				"dra",
+				"draw_cell"
+			],
+			[
+				"d",
+				"draw_top_bot"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"B",
+				"BOARD_SIZE"
+			],
+			[
+				"c",
+				"cn"
+			],
+			[
+				"SI",
+				"SIZE_CELL"
+			],
+			[
+				"S",
+				"SIZE_CELL"
+			],
+			[
+				"SIZE",
+				"SIZE_BOARD"
+			],
+			[
+				"SIZ",
+				"SIZE_CELL"
+			],
+			[
+				"siz",
+				"SIZE_BOARD"
+			],
+			[
+				"print",
+				"printf	printf …"
+			],
+			[
+				"w",
+				"ws_row"
+			],
+			[
+				"ws",
+				"ws_row"
+			],
+			[
+				"col",
+				"colle00"
+			],
+			[
+				"p",
+				"printf	printf …"
+			],
+			[
+				"mu",
+				"multi_fd"
 			],
 			[
 				"ft_s",
@@ -20,28 +84,42 @@
 	"buffers":
 	[
 		{
-			"file": "2048.c",
+			"file": "wong.h",
 			"settings":
 			{
-				"buffer_size": 73,
-				"line_ending": "Unix",
-				"name": "/* === HEADER === */"
+				"buffer_size": 440,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "2048.h",
+			"file": "2048.c",
 			"settings":
 			{
-				"buffer_size": 121,
-				"line_ending": "Unix",
-				"name": "/* == HEADER == */"
+				"buffer_size": 1473,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "colle00.c",
+			"settings":
+			{
+				"buffer_size": 2499,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 216,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 75.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
@@ -49,7 +127,7 @@
 				"View: Toggle Menu"
 			]
 		],
-		"width": 404.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -66,6 +144,10 @@
 	},
 	"file_history":
 	[
+		"/home/jwalle/github/ft_2048/.gitignore",
+		"/home/jwalle/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/jwalle/github/ft_2048/2048.c",
+		"/home/jwalle/github/ft_2048/2048.h",
 		"/home/jwalle/github/gnl/libft/ft_strdup.c",
 		"/home/jwalle/exercice/plop.c",
 		"/home/jwalle/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
@@ -89,6 +171,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"min_cell",
+			"y",
+			"int",
 			"str",
 			"free",
 			"."
@@ -99,6 +184,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"x",
 			"buf",
 			"->"
 		],
@@ -111,29 +197,28 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "2048.c",
+					"file": "wong.h",
 					"settings":
 					{
-						"buffer_size": 73,
+						"buffer_size": 440,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								20,
-								20
+								440,
+								440
 							]
 						],
 						"settings":
 						{
-							"auto_name": "/* === HEADER === */",
-							"syntax": "Packages/C++/C.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -143,24 +228,76 @@
 				},
 				{
 					"buffer": 1,
-					"file": "2048.h",
+					"file": "2048.c",
 					"settings":
 					{
-						"buffer_size": 121,
+						"buffer_size": 1473,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								121,
-								121
+								736,
+								736
 							]
 						],
 						"settings":
 						{
-							"auto_name": "/* == HEADER == */",
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 90.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "colle00.c",
+					"settings":
+					{
+						"buffer_size": 2499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1794,
+								1794
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11,
+								11
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
