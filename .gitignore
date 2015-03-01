@@ -16,6 +16,7 @@
 
 # Shared objects (inc. Windows DLLs)
 *.dll
+*.save
 *.so
 *.so.*
 *.dylib
@@ -27,4 +28,4 @@
 *.i*86
 *.x86_64
 *.hex
-2048
+game_2048
