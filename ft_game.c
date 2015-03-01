@@ -103,6 +103,8 @@ int		main(void)
 	toto.row = 0;
 	init_tab(&toto);
 	initscr();
+	start_color();
+	ft_init_color();
 	curs_set(0);
 	getmaxyx(stdscr, toto.row, toto.col);
 	keypad(stdscr, true);

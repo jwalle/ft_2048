@@ -51,14 +51,45 @@ void	draw_cell(t_tab *toto, int rang)
 		i++;
 	}
 }
-/*
+
 void	draw_color(int n, t_tab *toto, int i, int j, int xa)
 {
 	int x;
 	int y;
 
-	while ()
-}*/
+	x = 0;
+	while (x < xa)
+	{
+		y = 0;
+		while(y < toto->x)
+		{
+			attron(COLOR_PAIR(n));
+			mvprintw(i + y , j + x, " ");
+			attroff(COLOR_PAIR(n));
+			y++;
+		}
+		x++;
+	}
+}
+
+void	ft_init_color()
+{
+		init_color(COLOR_RED, 504, 200, 0);
+		init_color(COLOR_MAGENTA, 504, 200, 200);
+		init_color(COLOR_CYAN, 304, 200, 100);
+		init_pair(1, COLOR_RED, COLOR_GREEN);
+		init_pair(2, COLOR_BLACK, COLOR_WHITE);
+		init_pair(4, COLOR_BLACK, COLOR_YELLOW);
+		init_pair(8, COLOR_BLACK, COLOR_RED);
+		init_pair(16, COLOR_BLACK, COLOR_MAGENTA);
+		init_pair(32, COLOR_BLACK, COLOR_CYAN);
+		init_pair(64, COLOR_BLACK, COLOR_GREEN);
+		init_pair(128, COLOR_WHITE, COLOR_RED);
+		init_pair(256, COLOR_WHITE, COLOR_MAGENTA);
+		init_pair(512, COLOR_WHITE, COLOR_YELLOW);
+		init_pair(1024, COLOR_WHITE, COLOR_GREEN);
+		init_pair(2048, COLOR_WHITE, COLOR_BLACK);
+}
 
 void	draw_cell_number(int xa, t_tab *toto)
 {
@@ -71,12 +102,15 @@ void	draw_cell_number(int xa, t_tab *toto)
 		j = 1;
 		while (j < 5)
 		{
+			draw_color(toto->tab[i - 1][j - 1], toto, (toto->x * i - toto->x + 1), (xa * j - (xa * 2)) + xa, xa);
+			attron(COLOR_PAIR(toto->tab[i - 1][j - 1]));
 			(toto->tab[i - 1][j - 1] != 0) ?
 			mvprintw(toto->x * i - (toto->x / 2), xa * j - (xa / 2),
 			"%d", toto->tab[i - 1][j - 1]) :
-			mvprintw(toto->x * i - (toto->x / 2), xa * j - (xa / 2), " ");
+			mvprintw(toto->x * i - (toto->x / 2), xa * j - (xa / 2), " ");			
+			attroff(COLOR_PAIR(toto->tab[i - 1][j - 1]));
+
 			j++;
-			//draw_color(toto->tab[i - 1][j - 1], toto, toto->x * i - toto->x, xa * j - xa, xa);
 		}
 		i++;
 	}
@@ -91,6 +125,8 @@ void	colle00(t_tab *toto)
 	clear();
 	xa = toto->x * 2;
 	line = 0;
+	draw_cell_number(xa, toto);
+	attron(COLOR_PAIR(2));
 	while (line < 5)
 	{
 		draw_line(toto, xa, line);
@@ -102,7 +138,7 @@ void	colle00(t_tab *toto)
 		draw_cell(toto, rang);
 		rang++;
 	}
-	draw_cell_number(xa, toto);
+	attroff(COLOR_PAIR(2));
 }
 
 /*void	colle00(int x, int y)

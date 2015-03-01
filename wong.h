@@ -56,5 +56,6 @@ void			case_left(t_tab *toto);
 void			add_random(t_tab *toto);
 void			set_flags(t_tab *toto);
 int				check_loser(t_tab *toto);
+void			ft_init_color();
 
 #endif
