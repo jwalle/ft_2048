@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   set_flags.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 18:49:43 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/01 23:33:21 by jwalle           ###   ########.fr       */
+/*   Created: 2015/03/01 22:15:27 by jwalle            #+#    #+#             */
+/*   Updated: 2015/03/01 22:15:31 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "wong.h"
 
-char				*ft_strjoin(char const *s1, char const *s2)
+void	set_flags(t_flag *titi)
 {
-	int				s1_len;
-	int				s2_len;
-	char			*str;
-
-	if ((str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
-		return (NULL);
-	s1_len = -1;
-	while (s1[++s1_len])
-		str[s1_len] = s1[s1_len];
-	s2_len = -1;
-	while (s2[++s2_len])
-		str[s1_len + s2_len] = s2[s2_len];
-	str[s1_len + s2_len] = 0;
-	free((void *)s1);
-	return (str);
+	titi->flag1 = 0;
+	titi->flag2 = 0;
+	titi->flag3 = 0;
+	titi->flag4 = 0;
+	titi->flag5 = 0;
+	titi->flag6 = 0;
 }

@@ -12,17 +12,7 @@
 
 #include "wong.h"
 
-int		ft_cell_size(int max)
-{
-	int min_cell;
-
-	min_cell = 5;
-	while ((min_cell * 4 + 5) < max - 10)
-		min_cell = min_cell + 2;
-	return (min_cell);
-}
-
-void	draw_line(t_tab *toto, int xa, int line)
+static void		draw_line(t_tab *toto, int xa, int line)
 {
 	int i;
 
@@ -39,7 +29,7 @@ void	draw_line(t_tab *toto, int xa, int line)
 	mvprintw(line * toto->x, i, "+");
 }
 
-void	draw_cell(t_tab *toto, int rang)
+static void		draw_cell(t_tab *toto, int rang)
 {
 	int i;
 
@@ -52,19 +42,21 @@ void	draw_cell(t_tab *toto, int rang)
 	}
 }
 
-void	draw_color(int n, t_tab *toto, int i, int j, int xa)
+static void		draw_color(int n, t_tab *toto, int i, int j)
 {
 	int x;
 	int y;
+	int xa;
 
 	x = 0;
+	xa = toto->x * 2;
 	while (x < xa)
 	{
 		y = 0;
-		while(y < toto->x)
+		while (y < toto->x)
 		{
 			attron(COLOR_PAIR(n));
-			mvprintw(i + y , j + x, " ");
+			mvprintw(i + y, j + x, " ");
 			attroff(COLOR_PAIR(n));
 			y++;
 		}
@@ -72,26 +64,7 @@ void	draw_color(int n, t_tab *toto, int i, int j, int xa)
 	}
 }
 
-void	ft_init_color()
-{
-		init_color(COLOR_RED, 504, 200, 0);
-		init_color(COLOR_MAGENTA, 504, 200, 200);
-		init_color(COLOR_CYAN, 304, 200, 100);
-		init_pair(1, COLOR_RED, COLOR_GREEN);
-		init_pair(2, COLOR_BLACK, COLOR_WHITE);
-		init_pair(4, COLOR_BLACK, COLOR_YELLOW);
-		init_pair(8, COLOR_BLACK, COLOR_RED);
-		init_pair(16, COLOR_BLACK, COLOR_MAGENTA);
-		init_pair(32, COLOR_BLACK, COLOR_CYAN);
-		init_pair(64, COLOR_BLACK, COLOR_GREEN);
-		init_pair(128, COLOR_WHITE, COLOR_RED);
-		init_pair(256, COLOR_WHITE, COLOR_MAGENTA);
-		init_pair(512, COLOR_WHITE, COLOR_YELLOW);
-		init_pair(1024, COLOR_WHITE, COLOR_GREEN);
-		init_pair(2048, COLOR_WHITE, COLOR_BLACK);
-}
-
-void	draw_cell_number(int xa, t_tab *toto)
+static void		draw_cell_number(int xa, t_tab *toto)
 {
 	int i;
 	int j;
@@ -102,21 +75,25 @@ void	draw_cell_number(int xa, t_tab *toto)
 		j = 1;
 		while (j < 5)
 		{
-			draw_color(toto->tab[i - 1][j - 1], toto, (toto->x * i - toto->x + 1), (xa * j - (xa * 2)) + xa, xa);
+			draw_color(toto->tab[i - 1][j - 1], toto,
+				(toto->x * i - toto->x + 1), (xa * j - (xa * 2)) + xa);
 			attron(COLOR_PAIR(toto->tab[i - 1][j - 1]));
+			attron(A_BOLD);
 			(toto->tab[i - 1][j - 1] != 0) ?
 			mvprintw(toto->x * i - (toto->x / 2), xa * j - (xa / 2),
 			"%d", toto->tab[i - 1][j - 1]) :
-			mvprintw(toto->x * i - (toto->x / 2), xa * j - (xa / 2), " ");			
+			mvprintw(toto->x * i - (toto->x / 4), xa * j - (xa / 2), " ");
 			attroff(COLOR_PAIR(toto->tab[i - 1][j - 1]));
-
+			attroff(A_BOLD);
+			if (toto->tab[i - 1][j - 1] >= WIN_VALUE)
+				mvprintw(toto->row - 5, 5, "YOU WIN !");
 			j++;
 		}
 		i++;
 	}
 }
 
-void	colle00(t_tab *toto)
+void			ft_draw(t_tab *toto)
 {
 	int line;
 	int rang;
@@ -140,34 +117,3 @@ void	colle00(t_tab *toto)
 	}
 	attroff(COLOR_PAIR(2));
 }
-
-/*void	colle00(int x, int y)
-{
-	int		cn[2];
-	int		middle;
-
-	middle = (x / 2);
-	cn[1] = -1;
-	while (++cn[1] < y)
-	{
-		cn[0] = -1;
-		while (++cn[0] < x)
-		{
-			ft_putstr(BLUE_BG);
-			if ((!cn[0] && !cn[1] ) || (cn[1] == y - 1 && cn[0] == x - 1))
-				ft_putchar('+');
-			else if ((cn[0] == x - 1 && !cn[1]) ||(cn[1] == y - 1 && !cn[0]))
-				ft_putchar('+');
-			else if (cn[0] == middle && cn[1] == middle)
-				ft_putstr("1");
-			else if (cn[1] > 0 && cn[1] < y - 1 && cn[0] > 0 && cn[0] < x - 1)
-				ft_putstr(" ");
-			else if ((!cn[0] || cn[0] == x - 1) && cn[1] > 0 && cn[1] < y - 1)
-				ft_putchar('|');
-			else
-				ft_putchar('-');
-		}
-		ft_putstr(RESET);
-		ft_putchar('\n');
-	}
-}*/

@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   cell_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 18:49:43 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/01 23:33:21 by jwalle           ###   ########.fr       */
+/*   Created: 2015/03/01 21:36:11 by jwalle            #+#    #+#             */
+/*   Updated: 2015/03/01 21:36:32 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "wong.h"
 
-char				*ft_strjoin(char const *s1, char const *s2)
+int		ft_cell_size(int max)
 {
-	int				s1_len;
-	int				s2_len;
-	char			*str;
+	int min_cell;
 
-	if ((str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
-		return (NULL);
-	s1_len = -1;
-	while (s1[++s1_len])
-		str[s1_len] = s1[s1_len];
-	s2_len = -1;
-	while (s2[++s2_len])
-		str[s1_len + s2_len] = s2[s2_len];
-	str[s1_len + s2_len] = 0;
-	free((void *)s1);
-	return (str);
+	min_cell = 5;
+	while ((min_cell * 4 + 5) < max - 5)
+		min_cell = min_cell + 2;
+	return (min_cell);
 }

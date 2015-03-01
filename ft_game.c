@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/01 09:54:19 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/01 09:54:29 by jwalle           ###   ########.fr       */
+/*   Created: 2015/03/01 22:44:17 by jwalle            #+#    #+#             */
+/*   Updated: 2015/03/01 22:44:19 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wong.h"
 
-void	clear_tab(t_tab *toto)
+static void		clear_tab(t_tab *toto)
 {
 	int i;
 	int j;
@@ -30,24 +30,27 @@ void	clear_tab(t_tab *toto)
 	}
 }
 
-void	add_random(t_tab *toto)
+static void		ft_init_color(void)
 {
-	int i;
-	int j;
-
-	i = rand() % 4;
-	j = rand() % 4;
-	if (toto->tab[i][j] == 0)
-	{
-		(((rand()) % 100) < 50) ? (toto->tab[i][j] = 2)
-								: (toto->tab[i][j] = 4);
-		toto->empty--;
-	}
-	else
-		add_random(toto);
+	init_color(COLOR_RED, 500, 300, 200);
+	init_color(COLOR_MAGENTA, 304, 200, 209);
+	init_color(COLOR_CYAN, 304, 222, 100);
+	init_color(COLOR_WHITE, 155 * 4, 160 * 4, 160 * 4);
+	init_pair(1, COLOR_RED, COLOR_GREEN);
+	init_pair(2, COLOR_BLACK, COLOR_WHITE);
+	init_pair(4, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(8, COLOR_BLACK, COLOR_RED);
+	init_pair(16, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(32, COLOR_BLACK, COLOR_CYAN);
+	init_pair(64, COLOR_YELLOW, COLOR_CYAN);
+	init_pair(128, COLOR_RED, COLOR_CYAN);
+	init_pair(256, COLOR_MAGENTA, COLOR_RED);
+	init_pair(512, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(1024, COLOR_YELLOW, COLOR_GREEN);
+	init_pair(2048, COLOR_YELLOW, COLOR_WHITE);
 }
 
-void	init_tab(t_tab *toto)
+static void		init_tab(t_tab *toto)
 {
 	int i;
 	int j;
@@ -67,13 +70,15 @@ void	init_tab(t_tab *toto)
 	add_random(toto);
 }
 
-void	ft_game(t_tab *toto)
+void			ft_game(t_tab *toto)
 {
 	int c;
 
 	while ((c = getch()))
 	{
 		if (c == 27)
+			return ;
+		if (toto->empty == 0 && is_loser(toto))
 			return ;
 		if (c == KEY_UP)
 			case_up(toto);
@@ -83,7 +88,7 @@ void	ft_game(t_tab *toto)
 			case_right(toto);
 		if (c == KEY_LEFT)
 			case_left(toto);
-		colle00(toto);
+		ft_draw(toto);
 		getmaxyx(stdscr, toto->row, toto->col);
 		toto->col < toto->row ? (toto->size_board = toto->col)
 								: (toto->size_board = toto->row);
@@ -92,7 +97,7 @@ void	ft_game(t_tab *toto)
 	}
 }
 
-int		main(void)
+int				main(void)
 {
 	t_tab	toto;
 
@@ -104,6 +109,7 @@ int		main(void)
 	init_tab(&toto);
 	initscr();
 	start_color();
+	COLOR_PAIRS = 2049;
 	ft_init_color();
 	curs_set(0);
 	getmaxyx(stdscr, toto.row, toto.col);
@@ -111,8 +117,9 @@ int		main(void)
 	toto.col < toto.row ? (toto.size_board = toto.col)
 						: (toto.size_board = toto.row);
 	toto.x = ft_cell_size(toto.size_board);
-	colle00(&toto);
+	ft_draw(&toto);
 	ft_game(&toto);
 	endwin();
+	clear_tab(&toto);
 	return (0);
 }

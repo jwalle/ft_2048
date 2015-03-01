@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   add_random.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 18:49:43 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/01 23:33:21 by jwalle           ###   ########.fr       */
+/*   Created: 2015/03/01 22:10:37 by jwalle            #+#    #+#             */
+/*   Updated: 2015/03/01 22:10:41 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "wong.h"
 
-char				*ft_strjoin(char const *s1, char const *s2)
+void	add_random(t_tab *toto)
 {
-	int				s1_len;
-	int				s2_len;
-	char			*str;
+	int i;
+	int j;
 
-	if ((str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
-		return (NULL);
-	s1_len = -1;
-	while (s1[++s1_len])
-		str[s1_len] = s1[s1_len];
-	s2_len = -1;
-	while (s2[++s2_len])
-		str[s1_len + s2_len] = s2[s2_len];
-	str[s1_len + s2_len] = 0;
-	free((void *)s1);
-	return (str);
+	i = rand() % 4;
+	j = rand() % 4;
+	if (toto->tab[i][j] == 0)
+	{
+		(((rand()) % 100) < 50) ? (toto->tab[i][j] = 2)
+								: (toto->tab[i][j] = 4);
+		toto->empty--;
+	}
+	else
+		add_random(toto);
 }
